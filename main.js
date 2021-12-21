@@ -1,5 +1,5 @@
-let urlImg, cocktailName, alcoholic, description = '';
-let change = document.getElementById("change");
+let urlImg, cocktailName, alcoholic, description;
+const change = document.getElementById("change");
 
 async function getCockail() {
     try {
