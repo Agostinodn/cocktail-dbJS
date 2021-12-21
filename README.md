@@ -1,6 +1,6 @@
 # Cocktail-dbJS
 ### random cocktail generator
-Vanilla JavaScript to building a small app for exercise
+Vanilla JavaScript to create an app as an exercise
  - [cocktailDB](https://www.thecocktaildb.com/)
 
 
