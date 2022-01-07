@@ -35,7 +35,7 @@ const addCocktail = document.getElementById("add");
 addCocktail.addEventListener("click", () => {
     let newArrayOrders = [...ordersList, cocktailName[0]];
     ordersList = newArrayOrders;
-    orderDom.innerText = "Ordine: " + ordersList;
+    orderDom.innerText = "Ordine in corso: " + ordersList;
     return ordersList;
 });
 
@@ -55,23 +55,28 @@ buyButton.addEventListener("click", async () => {
             },
             body: JSON.stringify(ordersList)
         }).then((res) => {
-            console.log(res);
             if (res.status >= 400 && res.status <= 451) {
-                throw new Error("Client responses " + res.status + ' ' + res.statusText)
+                throw new Error("Errore di risposta Client " + res.status + ' ' + res.statusText);
             } else if (500 >= res.status >= 511) {
-                throw new Error("Server responses " + res.status + ' ' + res.statusText)
+                throw new Error("Errore di risposta Server " + res.status + ' ' + res.statusText);
             } else if (res.ok === true) {
                 localStorage.setItem("order", ordersList);
             }
-        })
+        }).catch((e) => {
+            console.error("Si è verificato un errore " + e);
+            console.error("Assicuratevi di essere connessi al Database 'db.json'");
+        });
     } catch (error) {
-        console.error(error)
+        console.error(error);
     };
 });
 
-if (data.length > 0 && data !== null) {
-    orderDom.innerText = "Ordine effettuato: " +
-        localStorage.getItem("order", ordersList);
-} else {
-    orderDom.innerText = "Effettua il tuo ordine!"
+// LOCAL STORAGE DATA
+if (data !== null) {
+    if (data.length > 0) {
+        orderDom.innerText = "Ordine effettuato: " +
+            localStorage.getItem("order", ordersList);
+    } else {
+        orderDom.innerText = "Effettua il tuo ordine!"
+    }
 }
