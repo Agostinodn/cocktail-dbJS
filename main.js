@@ -54,6 +54,8 @@ buyButton.addEventListener("click", async () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(ordersList)
+        }).catch((e) => {
+            console.error("Assicurati di essere connesso al Database 'db.json' " + e);
         }).then((res) => {
             if (res.status >= 400 && res.status <= 451) {
                 throw new Error("Errore di risposta Client " + res.status + ' ' + res.statusText);
@@ -64,19 +66,16 @@ buyButton.addEventListener("click", async () => {
             }
         }).catch((e) => {
             console.error("Si è verificato un errore " + e);
-            console.error("Assicuratevi di essere connessi al Database 'db.json'");
-        });
+        })
     } catch (error) {
         console.error(error);
     };
 });
 
 // LOCAL STORAGE DATA
-if (data !== null) {
-    if (data.length > 0) {
-        orderDom.innerText = "Ordine effettuato: " +
-            localStorage.getItem("order", ordersList);
-    } else {
-        orderDom.innerText = "Effettua il tuo ordine!"
-    }
-}
+if (data !== null && data.length > 0) {
+    orderDom.innerText = "Ordine effettuato: " +
+        localStorage.getItem("order", ordersList);
+} else {
+    orderDom.innerText = "Effettua il tuo ordine!"
+};
