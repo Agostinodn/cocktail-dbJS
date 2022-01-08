@@ -30,7 +30,7 @@ async function getCockail() {
         drink.strIngredient14,
         drink.strIngredient15
     ]);
-    ingredients = ingredients[0].filter(ingredient => ingredient !== null);
+    ingredients = ingredients[0].filter(ingredient => ingredient !== null).join(', ');
 
 
     document.getElementById('cocktailImg').setAttribute('src', urlImg);
@@ -85,10 +85,10 @@ buyButton.addEventListener("click", async () => {
             } else if (500 >= res.status >= 511) {
                 throw new Error("Errore di risposta Server " + res.status + ' ' + res.statusText);
             } else if (res.ok === true) {
-                localStorage.setItem("order", ordersList);
+                return localStorage.setItem("order", ordersList);
             }
         }).catch((e) => {
-            console.error("POST METHOD: " + e);
+            console.error("RESPONSE POST METHOD: " + e);
         })
     } catch (error) {
         console.error(error);
