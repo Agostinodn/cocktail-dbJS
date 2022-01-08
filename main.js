@@ -97,8 +97,7 @@ buyButton.addEventListener("click", async () => {
 
 // LOCAL STORAGE DATA
 if (data !== null && data.length > 0) {
-    orderDom.innerText = "Ordine effettuato: " +
-        localStorage.getItem("order", ordersList);
+    orderDom.innerText = "Ordine effettuato: " + data;
 } else {
     orderDom.innerText = "Effettua il tuo ordine!"
 };
