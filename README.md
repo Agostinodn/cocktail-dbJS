@@ -20,4 +20,4 @@ json-server db.json
 
 ### Screenshots
 
-![App Screenshot](./assets/app1.png)
+![App Screenshot](./assets/app.png)
