@@ -85,7 +85,13 @@ buyButton.addEventListener("click", async () => {
             } else if (500 >= res.status >= 511) {
                 throw new Error("Errore di risposta Server " + res.status + ' ' + res.statusText);
             } else if (res.ok === true) {
-                return localStorage.setItem("order", ordersList);
+                localStorage.setItem("order", ordersList);
+                let data = localStorage.getItem("order", ordersList);
+                if (data !== null && data.length != 0) {
+                    return orderDom.innerText = "Ordine effettuato: " + data;
+                } else {
+                    return orderDom.innerText = "Non ci sono Cocktail selezionati"
+                };
             }
         }).catch((e) => {
             console.error("RESPONSE POST METHOD: " + e);
@@ -94,10 +100,3 @@ buyButton.addEventListener("click", async () => {
         console.error(error);
     };
 });
-
-// LOCAL STORAGE DATA
-if (data !== null && data.length > 0) {
-    orderDom.innerText = "Ordine effettuato: " + data;
-} else {
-    orderDom.innerText = "Effettua il tuo ordine!"
-};
